@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Posts</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+    <h1>Let's create a New Blog Post!</h1>
+
+    <form action="/new-post" method="POST">
+        <label for="title">What do you want to call your blog?</label>
+        <input type="text" id="title" name="title" required><br><br>
+
+        <label for="author">Who's writing this?</label>
+        <input type="text" id="author" name="author" required><br><br>
+
+        <label for="content">What are we writing about? Tell us!</label><br>
+        <textarea id="content" name="content" rows="5" cols="30" required></textarea><br><br>
+
+        <button type="submit">Post!</button>
+    </form>
+
+    <h2>All Posts</h2>
+    <ul>
+        <% posts.forEach(function(post, index) { %>
+            <li>
+                <h3><%= post.title %></h3>
+                <p>by <%= post.author %></p>
+                <p><%= post.content %></p>
+                
+                <form action="/edit/<%= index %>" method="GET" style="display:inline;">
+                    <button>Edit</button>
+                </form>
+                <form action="/delete/<%= index %>" method="POST" style="display:inline;">
+                    <button>Delete</button>
+                </form>
+            </li>
+        <% }) %>
+    </ul>
+</body>
+</html>
